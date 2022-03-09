@@ -7,4 +7,6 @@ Intended for convenience, and may be useful as launchers to inject dlls in order
 The "launch_modded_eldenring.exe" launcher must be in the ELDENRING/Game directory (where eldenring.exe is located)
 
 Please don't attempt to play online without Easy Anti-Cheat.
+
+Feel free to modify/redistribute/repackage this launcher with your own mods.
  
