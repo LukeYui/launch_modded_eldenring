@@ -78,6 +78,7 @@ bool LaunchModdedEldenRing::InjectDLLMods() {
 		while (std::getline(file, line)) {
 			printf_s("Loading %s...\n", line.c_str());
 			if (!InjectMod(line.c_str())) {
+				printf_s("Failed to load %s...\n", line.c_str());
 				return false;
 			};
 		}
