@@ -1,5 +1,6 @@
 #include "launch_modded_eldenring.h"
 
+
 int main() {
     LaunchModdedEldenRing ModLauncher = LaunchModdedEldenRing();
     ModLauncher.Run();
@@ -11,6 +12,13 @@ void LaunchModdedEldenRing::Run() {
     using namespace std::chrono_literals;
 
     if (!LaunchGame()) {
+        should_run = false;
+        system("PAUSE");
+        return;
+    };
+
+
+    if (!InjectDLLMods()) {
         should_run = false;
         system("PAUSE");
         return;
@@ -60,6 +68,24 @@ bool LaunchModdedEldenRing::LaunchGame() {
     elden_ring_thread = process_info.hThread;
     elden_ring_handle = process_info.hProcess;
 
+    return true;
+}
+
+bool LaunchModdedEldenRing::InjectDLLMods() {
+    std::ifstream file("eldenring_mods.txt");
+    if (file.is_open()) {
+        std::string line;
+        while (std::getline(file, line)) {
+            //checking the whole string, because filenames shouldn't have this in them, either. Allows comments  
+            if (line.find(std::string(";")) != std::string::npos) {
+                printf_s("Loading %s...\n", line.c_str());
+                if (!InjectMod(line.c_str())) {
+                    return false;
+                };
+            }
+        }
+        file.close();
+    }
     return true;
 };
 
