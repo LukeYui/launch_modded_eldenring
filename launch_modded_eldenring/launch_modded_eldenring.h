@@ -10,6 +10,9 @@ public:
 	bool LaunchGame();
 	bool InjectDLLMods();
 	bool InjectMod(const char* mod_name);
+	bool FileNotFound(const std::wstring& name);
+	bool CheckConditions();
+	std::string GetExePath();
 
 	LaunchModdedEldenRing() {
 		should_run = true;
